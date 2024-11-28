@@ -34,7 +34,6 @@ def hang_man():
                 blank = blank_space
                 print(blank)
             if "_" not in blank:
-                print("Congratulations, you've guessed the word!")
                 result = 1
                 break
             else:
@@ -43,17 +42,24 @@ def hang_man():
         if "_" not in blank:
             break
         elif attemps == 0:
-            print(f"Game over! The word was: {chosen_word}")
             result = 0
             break
         
-        return result 
+    return result, chosen_word
     
     
-
+def game_result(result, chosen_word) :
+    if result == 1 :
+        print("Congratulations, you've guessed the word!")
+    elif result == 2 :
+        print(f"Game over! The word was: {chosen_word}")
+    else: 
+        raise ValueError(f"Action not defined for result value {chosen_word}")
+   
 
 if __name__ == '__main__':
     print("Start game hangman")
-    res = hang_man()
+    res, chosen_word = hang_man()
+    game_result(res, chosen_word)
     print(f"Game is done! Result value is: {res}")
     
