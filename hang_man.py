@@ -23,16 +23,7 @@ def hang_man():
                 continue
             if guess in chosen_word:
                 print("that correct")
-                index = 0
-                blank_space = ""
-                while index < len(chosen_word):
-                    if chosen_word[index] == guess:
-                        blank_space += guess
-                    else:
-                        blank_space += blank[index]
-                    index += 1
-                blank = blank_space
-                print(blank)
+            blank = string_correction(guess,chosen_word,blank)
             if "_" not in blank:
                 result = 1
                 break
@@ -48,13 +39,34 @@ def hang_man():
     return result, chosen_word
     
     
-def game_result(result, chosen_word) :
-    if result == 1 :
+def string_correction(guess,chosen_word,blank):
+    index = 0
+    blank_space = ""
+    blank_updated = blank
+    
+    while index < len(chosen_word):
+        if chosen_word[index] == guess:
+            blank_space += guess
+        else:
+            blank_space += blank_updated[index]
+        index += 1
+    blank_updated = blank_space
+    return blank_updated
+    
+    
+def game_result(game_result, chosen_word) :
+    res = 0
+    if game_result == 1 :
         print("Congratulations, you've guessed the word!")
-    elif result == 2 :
+        res = 1
+    elif game_result == 2 :
         print(f"Game over! The word was: {chosen_word}")
+    elif game_result == 0:
+        print(f"Something is wrong with the function hang_man()!")
     else: 
         raise ValueError(f"Action not defined for result value {chosen_word}")
+    
+    return res
    
 
 if __name__ == '__main__':
