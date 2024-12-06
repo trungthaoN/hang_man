@@ -1,10 +1,5 @@
 import random
-
-
-
 print("Welcome To Hang Man")
-
-
 def hang_man(): 
     result = 0 # something is wrong if return 0 
     
@@ -12,29 +7,38 @@ def hang_man():
             "Marathon", "Beautiful", "Volcanoes", "Adventure", "Quadratic"]
     start = input("Do you want to start the game Y/N ?").lower()
     attemps = 10
-    while start == "y":
-        chosen_word = vocab[random.randint(0, len(vocab)-1)].lower()
-        blank = "_" * len(chosen_word)
-        print(f"This word have {len(chosen_word)} characters: {blank}")
-        while attemps > 0:
-            guess = input("What is your guest (one word at a time only)?").lower()
-            if len(guess) != 1:
-                print("Please guess one letter at a time!")
-                continue
-            if guess in chosen_word:
-                print("that correct")
-            blank = string_correction(guess,chosen_word,blank)
-            if "_" not in blank:
-                result = 1
-                break
-            else:
-                attemps -= 1
-                print(f"Wrong guess. You have {attemps} attempts left.")
-        if "_" not in blank:
-            break
-        elif attemps == 0:
-            result = 0
-            break
+    chosen_word = vocab[random.randint(0, len(vocab)-1)].lower()
+    if start != "y":
+        result =2
+    else:
+            blank = "_" * len(chosen_word)
+            print(f"This word have {len(chosen_word)} characters: {blank}")
+            while attemps > 0:
+                guess = input("What is your guest (one word at a time only)?").lower()
+                if len(guess) != 1:
+                    print("Please guess one letter at a time!")
+                    continue
+                elif guess in chosen_word:
+                    if guess in blank:
+                        print("You already enter that letter")
+                        attemps -=1
+                        print(f"You have {attemps} attempts left.")
+                    else:
+                        print("that correct")
+                        blank = string_correction(guess,chosen_word,blank)
+                        print(f"Current word {blank}")
+                elif guess not in chosen_word :
+                    attemps -= 1
+                    print(f"Wrong guess. You have {attemps} attempts left.")
+
+
+                if "_" not in blank:
+                    result = 1
+                    break
+            
+                if attemps == 0:
+                        result = 2
+                        break
         
     return result, chosen_word
     
