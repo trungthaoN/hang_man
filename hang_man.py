@@ -1,13 +1,17 @@
 import random
 print("Welcome To Hang Man")
+def words_picker():
+    f = open("words.txt" , "r")
+    words = f.readlines()
+    words = [x.strip() for x in words]
+    pick_word = random.choice(words)
+    f.close()
+    return pick_word
 def hang_man(): 
     result = 0 # something is wrong if return 0 
-    
-    vocab = ["Umbrella", "Laboratory", "Eccentric", "Dictionary", "Landscape",
-            "Marathon", "Beautiful", "Volcanoes", "Adventure", "Quadratic"]
     start = input("Do you want to start the game Y/N ?").lower()
     attemps = 10
-    chosen_word = vocab[random.randint(0, len(vocab)-1)].lower()
+    chosen_word = words_picker()
     if start != "y":
         result =2
     else:
