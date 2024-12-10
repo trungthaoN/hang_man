@@ -1,6 +1,5 @@
 import random
-
-print("Welcome To Hang Man")
+import os
 
 
 def words_picker():
@@ -13,14 +12,10 @@ def words_picker():
 
 
 def hang_man():
-    
-
     chosen_word = words_picker()
     start = input("Do you want to start the game Y/N ?").lower()
+    clear_console()
     if start != "y":
-
-     
-
         return 2, chosen_word
     attempts = 10
     blank = "_" * len(chosen_word)
@@ -31,9 +26,8 @@ def hang_man():
 
 def game_play(chosen_word, attempts, blank):
     while attempts > 0 and "_" in blank:
-        guess = input(
-            "What is your guess (one letter at a time only)? ").lower()
-
+        guess = input("What is your guess (one letter at a time only)? ").lower()
+        clear_console()
         if len(guess) != 1:
             print("Please guess one letter at a time!")
             continue
@@ -49,12 +43,12 @@ def game_play(chosen_word, attempts, blank):
         else:
             attempts -= 1
             print(f"Wrong guess. You have {attempts} attempts left.")
+            
 
     if "_" not in blank:
         return 1
     elif attempts == 0:
         return 2
-
 
 
 def string_correction(guess, chosen_word, blank):
@@ -72,9 +66,6 @@ def string_correction(guess, chosen_word, blank):
     return blank_updated
 
 
-
-
-
 def game_result(result, chosen_word):
     if result == 1:
         print("Congratulations, you've guessed the word!")
@@ -86,18 +77,14 @@ def game_result(result, chosen_word):
         raise ValueError(f"Action not defined for result value {chosen_word}")
 
     return result
-
-
-
-    return res
+def clear_console():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    
 
 
 if __name__ == "__main__":
+    print("Welcome To Hang Man")
     print("Start game hangman")
-
-
-
     result, chosen_word = hang_man()
     game_result(result, chosen_word)
     print(f"Game is done! Result value is: {result}")
-
