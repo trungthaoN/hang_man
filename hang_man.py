@@ -13,50 +13,14 @@ def words_picker():
 
 
 def hang_man():
-<<<<<<< HEAD
-    result = 0  # something is wrong if return 0
-    start = input("Do you want to start the game Y/N ?").lower()
-    attemps = 10
-=======
->>>>>>> 22a80308db2d1cbec57f7c5c3cc8969891262a13
+    
+
     chosen_word = words_picker()
     start = input("Do you want to start the game Y/N ?").lower()
     if start != "y":
-<<<<<<< HEAD
-        result = 2
-    else:
-        blank = "_" * len(chosen_word)
-        print(f"This word have {len(chosen_word)} characters: {blank}")
-        while attemps > 0:
-            guess = input("What is your guest (one word at a time only)?").lower()
-            if len(guess) != 1:
-                print("Please guess one letter at a time!")
-                continue
-            elif guess in chosen_word:
-                if guess in blank:
-                    print("You already enter that letter")
-                    attemps -= 1
-                    print(f"You have {attemps} attempts left.")
-                else:
-                    print("that correct")
-                    blank = string_correction(guess, chosen_word, blank)
-                    print(f"Current word {blank}")
-            elif guess not in chosen_word:
-                attemps -= 1
-                print(f"Wrong guess. You have {attemps} attempts left.")
 
-            if "_" not in blank:
-                result = 1
-                break
+     
 
-            if attemps == 0:
-                result = 2
-                break
-
-    return result, chosen_word
-
-
-=======
         return 2, chosen_word
     attempts = 10
     blank = "_" * len(chosen_word)
@@ -92,7 +56,7 @@ def game_play(chosen_word, attempts, blank):
         return 2
 
 
->>>>>>> 22a80308db2d1cbec57f7c5c3cc8969891262a13
+
 def string_correction(guess, chosen_word, blank):
     index = 0
     blank_space = ""
@@ -108,19 +72,9 @@ def string_correction(guess, chosen_word, blank):
     return blank_updated
 
 
-<<<<<<< HEAD
-def game_result(game_result, chosen_word):
-    res = 0
-    if game_result == 1:
-        print("Congratulations, you've guessed the word!")
-        res = 1
-    elif game_result == 2:
-        print(f"Game over! The word was: {chosen_word}")
-    elif game_result == 0:
-        print("Something is wrong with the function hang_man()!")
-    else:
-        raise ValueError(f"Action not defined for result value {chosen_word}")
-=======
+
+
+
 def game_result(result, chosen_word):
     if result == 1:
         print("Congratulations, you've guessed the word!")
@@ -133,19 +87,17 @@ def game_result(result, chosen_word):
 
     return result
 
->>>>>>> 22a80308db2d1cbec57f7c5c3cc8969891262a13
+
 
     return res
 
 
 if __name__ == "__main__":
     print("Start game hangman")
-<<<<<<< HEAD
-    res, chosen_word = hang_man()
-    game_result(res, chosen_word)
-    print(f"Game is done! Result value is: {res}")
-=======
+
+
+
     result, chosen_word = hang_man()
     game_result(result, chosen_word)
     print(f"Game is done! Result value is: {result}")
->>>>>>> 22a80308db2d1cbec57f7c5c3cc8969891262a13
+
