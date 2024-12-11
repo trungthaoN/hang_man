@@ -34,16 +34,18 @@ def game_play(chosen_word, attempts, blank):
 
         if guess in chosen_word:
             if guess in blank:
-                print("You already entered that letter.")
+                print("That letter is already in the words")
+                print(f"You have {attempts} attempts left.")
                 attempts -= 1
             else:
                 print("That is correct!")
                 blank = string_correction(guess, chosen_word, blank)
+                print(f"You have {attempts} attempts left.")
             print(f"Current word: {blank}")
         else:
             attempts -= 1
             print(f"Wrong guess. You have {attempts} attempts left.")
-            
+            print(f"Current word: {blank}")
 
     if "_" not in blank:
         return 1
@@ -77,9 +79,10 @@ def game_result(result, chosen_word):
         raise ValueError(f"Action not defined for result value {chosen_word}")
 
     return result
+
+
 def clear_console():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 if __name__ == "__main__":
