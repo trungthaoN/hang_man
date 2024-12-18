@@ -1,5 +1,6 @@
 import random
 import os
+from ASCII_ART import HANGMAN_ART, Welcome_art, Game_Over_art
 
 
 def words_picker():
@@ -17,16 +18,19 @@ def hang_man():
     clear_console()
     if start != "y":
         return 2, chosen_word
-    attempts = 10
+    attempts = 8
     blank = "_" * len(chosen_word)
     print(f"This word has {len(chosen_word)} characters: {blank}")
+    print(HANGMAN_ART[0])
     result = game_play(chosen_word, attempts, blank)
     return result, chosen_word
 
 
 def game_play(chosen_word, attempts, blank):
+    wrong_attempts = 0
     while attempts > 0 and "_" in blank:
-        guess = input("What is your guess (one letter at a time only)? ").lower()
+        guess = input(
+            "What is your guess (one letter at a time only)? ").lower()
         clear_console()
         if len(guess) != 1:
             print("Please guess one letter at a time!")
@@ -37,6 +41,8 @@ def game_play(chosen_word, attempts, blank):
                 print("That letter is already in the words")
                 print(f"You have {attempts} attempts left.")
                 attempts -= 1
+                wrong_attempts += 1
+                print(HANGMAN_ART[wrong_attempts])
             else:
                 print("That is correct!")
                 blank = string_correction(guess, chosen_word, blank)
@@ -44,6 +50,8 @@ def game_play(chosen_word, attempts, blank):
             print(f"Current word: {blank}")
         else:
             attempts -= 1
+            wrong_attempts += 1
+            print(HANGMAN_ART[wrong_attempts])
             print(f"Wrong guess. You have {attempts} attempts left.")
             print(f"Current word: {blank}")
 
@@ -73,6 +81,7 @@ def game_result(result, chosen_word):
         print("Congratulations, you've guessed the word!")
     elif result == 2:
         print(f"Game over! The word was: {chosen_word}")
+        print(Game_Over_art)
     elif result == 0:
         print("Something is wrong with the function hang_man()!")
     else:
@@ -87,6 +96,7 @@ def clear_console():
 
 if __name__ == "__main__":
     print("Welcome To Hang Man")
+    print(Welcome_art)
     print("Start game hangman")
     result, chosen_word = hang_man()
     game_result(result, chosen_word)
